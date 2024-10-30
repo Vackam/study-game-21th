@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 2298911218330414daa9505efa8648dd
+  productGUID: d2442204426329f48b075937190e3051
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: study-game
+  productName: apptive_study
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -630,14 +630,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: study-game
+  metroPackageName: apptive_study
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: study-game
+  metroApplicationDescription: apptive_study
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -706,11 +706,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: dc739c37-885c-4f05-86d1-1403b0a013c3
+  cloudProjectId: 83ccf4b7-bb9e-40ba-a498-4d35c4d35fb3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: study-game
-  organizationId: unity_1d9005c7cb726d0d4605
+  projectName: apptive_study
+  organizationId: backam
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
