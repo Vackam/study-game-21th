@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     public float hp = 100;
     void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player"); 
+        GameObject player = GameMgr.Instance.GetPlayer();
         if(player != null)
         {
             playerTransform = player.transform;
