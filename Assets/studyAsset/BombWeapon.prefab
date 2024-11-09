@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8343008381000555807}
-  - component: {fileID: 6869936000719805522}
   - component: {fileID: 325982450555797045}
   - component: {fileID: -2671548053724781631}
   m_Layer: 0
@@ -34,21 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6869936000719805522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7536489553350793314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dba605fd7d357e409d8bb64f76129ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  waitingTime: 0
-  abc: {fileID: 0}
 --- !u!212 &325982450555797045
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,9 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe468c8dcd467d64aa60f3ebd8ba89e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BombTimer: 1
-  BombRad: 3
-  Counter: 0
   colliders:
   - {fileID: 0}
   - {fileID: 0}
@@ -169,4 +150,4 @@ MonoBehaviour:
   - {fileID: 0}
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 256

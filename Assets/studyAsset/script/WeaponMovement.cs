@@ -12,10 +12,10 @@ public class WeaponMovement : MonoBehaviour
         LEFT,
         RIGHT
     }
-    public float speed = 0;
-    public float range = 0;
-    public float timer = 0;
-    public Direction dir;
+    private float speed = 0;
+    private float range = 0;
+    private float timer = 0;
+    private Direction dir;
 
 
     // 얘는 Player에서 알아서 해줄 거임.
@@ -37,16 +37,21 @@ public class WeaponMovement : MonoBehaviour
         else if (dir == Direction.RIGHT)
             transform.position += Vector3.right * speed * Time.deltaTime;
     }
-    void Delete()
+    IEnumerator Delete()
     {
-       if (timer > range)
-        {
-            Destroy(this.gameObject);
-            timer = 0;
-        }
-
-        timer += Time.deltaTime;
+        yield return new WaitForSeconds(range);
+        Destroy(gameObject);
     }
+    //void Delete()
+    //{
+    //   if (timer > range)
+    //    {
+    //        Destroy(this.gameObject);
+    //        timer = 0;
+    //    }
+
+    //    timer += Time.deltaTime;
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -59,13 +64,12 @@ public class WeaponMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       StartCoroutine(Delete()); 
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        Delete();
     }
 }

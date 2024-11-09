@@ -10,8 +10,6 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 5f;
     public GameObject abc;
     public GameObject Weapon;
-    public GameObject[] CircleWeapon;
-    public GameObject Bomb;
 
 
     // Weapon 관련 변수
@@ -33,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     public float BombSpeed = 2.0f;
     public float BombTimer = 0f;
 
-    public bool theWorld = false;
 
     void getLeft()
     {
@@ -85,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-
     }
 
     void AttackDirection()
@@ -110,26 +106,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void BombUpdate()
-    {
-        if(BombSpeed < BombTimer)
-        {
-            try
-            {
-                Vector3 MyPosition = transform.position;
-                GameObject weaponCreate =  Instantiate(Bomb, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
-                BombTimer = 0.0f;
-            }
-            catch (UnassignedReferenceException)
-            {
-            }
-        }
-        else
-        {
-            BombTimer += Time.deltaTime;
-        }
-    }
-
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -145,8 +121,7 @@ public class PlayerMovement : MonoBehaviour
         getRight();
         getDown();
         getLeft();
-        Attack();
-        AttackDirection();
-        BombUpdate();
+        //Attack();
+        //AttackDirection();
     }
 }

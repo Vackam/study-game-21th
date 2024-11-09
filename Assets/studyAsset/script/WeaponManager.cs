@@ -36,6 +36,76 @@ public class WeaponManager : MonoBehaviour
     /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
     GameObject player;
     /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+    // Basic Weapon 관련 변수
+    [SerializeField]
+    private GameObject BasicWeapon;
+
+    private float AttackRange = 5.0f; // 사정거리
+    private float AttackSpeed = 0.5f; // 몇초마다 발사 할 건지
+    public enum Direction
+    {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+    [SerializeField]
+    private Direction currentDir = Direction.LEFT;
+    private float timer;
+
+    private float waitingtime;
+    
+    // Basic Weapon 관련 함수
+    void AttackDirection()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            currentDir = Direction.UP;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            currentDir = Direction.DOWN;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            currentDir = Direction.LEFT;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            currentDir = Direction.RIGHT;
+        }
+    }
+    void Attack()
+    {
+        if(timer > AttackSpeed)
+            try
+            {
+                Vector3 MyPosition = transform.position;
+                GameObject weaponCreate =  Instantiate(BasicWeapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
+                weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
+                timer = 0.0f;
+            }
+            catch (UnassignedReferenceException)
+            {
+            }
+        else
+        {
+            timer += Time.deltaTime;
+        }
+    }
+    IEnumerator BasicAttack()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(AttackSpeed);
+            Vector3 MyPosition = player.transform.position;
+            GameObject weaponCreate = Instantiate(BasicWeapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
+            weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
+
+        }  
+    }
+
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
     // Circle Weapon 관련 변수
     public GameObject[] CircleWeapon;
 
@@ -46,7 +116,8 @@ public class WeaponManager : MonoBehaviour
     private float CircleSpeed = 50f; // 회전 속도
 
     private float CircleCurrentDegree = 0f; // 현재 회전 각도
-    // 에러나서 변경
+
+    // Circle Weapon 관련 함수
     private void CreateCircle(GameObject Player)
     {
         CircleWeapon = new GameObject[CircleCount];
@@ -79,6 +150,38 @@ public class WeaponManager : MonoBehaviour
             CircleWeapon[i].transform.rotation = Quaternion.Euler(0, 0, -angle);
         }
     }
+    // Circle 끝
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+    // Bomb Weapon 관련 변수
+    public GameObject Bomb;
+
+    private float BombSpeed = 2.0f; // Bomb 폭발 주기
+    private float BombTimer = 0f; // Bomb 폭발을 위한 시간 타이머
+
+    // Bomb Weapon 관련 함수
+    void BombUpdate()
+    {
+        if(BombSpeed < BombTimer)
+        {
+            try
+            {
+                Vector3 MyPosition = transform.position;
+                GameObject weaponCreate =  Instantiate(Bomb, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
+                BombTimer = 0.0f;
+            }
+            catch (UnassignedReferenceException)
+            {
+            }
+        }
+        else
+        {
+            BombTimer += Time.deltaTime;
+        }
+    }
+    // Bomb 끝
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 
     void Start()
     {
@@ -90,7 +193,8 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         // Circle create
-        CreateCircle(player); 
+        CreateCircle(player);
+        StartCoroutine(BasicAttack());
     }
 
     // Update is called once per frame
@@ -101,5 +205,8 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         CircleUpdate(player); 
+        BombUpdate();
+        AttackDirection();
+        //Attack();
     }
 }

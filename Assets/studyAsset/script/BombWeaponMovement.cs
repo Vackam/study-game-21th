@@ -4,51 +4,44 @@ using UnityEngine;
 
 public class BombWeaponMovement : MonoBehaviour
 {
-    public float BombTimer = 1.0f;
-    public float BombRad = 3.0f;
+    private float BombTimer = 1.0f;
+    private float BombRad = 3.0f;
 
-    public float Counter = 0.0f;
+    private float Counter = 0.0f;
+    private int BombEnemyRange = 10; // 기본 10으로 설정
 
-    public Collider2D[] colliders = new Collider2D[50]; // 우선 50마리만 잡도록.
+    [SerializeField]
+    private Collider2D[] colliders;
 
-    public LayerMask EnemyLayer;
+    [SerializeField]
+    private LayerMask EnemyLayer;
 
-    void BombAttack()
+    IEnumerator BombAttack()
     {
-        // 1초가 안지난 경우
-        if(BombTimer > Counter)
+        yield return new WaitForSeconds(BombTimer);
+        colliders = Physics2D.OverlapCircleAll(transform.position, BombRad, EnemyLayer);
+        int count = 0;
+        if(colliders.Length > 0)
         {
-            Counter += Time.deltaTime;
-        }
-
-        else
-        {
-            // 주변 적에게 피해
-            // 주변 적 확인
-            colliders = Physics2D.OverlapCircleAll(transform.position, BombRad, EnemyLayer);
-            int count = 0;
-            if(colliders.Length > 0)
+            while(colliders[count] && count <= BombEnemyRange)
             {
-                while(colliders[count] && count <= 50)
-                {
-                    colliders[count].gameObject.GetComponent<EnemyMovement>().hp -= 100;
-                    count++;
-                } 
-            }
-            // 삭제한다.
-            Destroy(this.gameObject);
+                colliders[count].gameObject.GetComponent<EnemyMovement>().hp -= 100;
+                count++;
+            } 
         }
+        // 삭제한다.
+        Destroy(gameObject);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       StartCoroutine(BombAttack()); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        BombAttack(); 
     }
 }
