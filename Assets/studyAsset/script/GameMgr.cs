@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameMgr : MonoBehaviour
 {
     // Start is called before the first frame update
     // Player À§Ä¡ Àâ¾Æ´Ù ²ô´Â ¿ªÇÒ.
+    // GameManage¸¦ ÃÑ°ýÇÏÀÚ.
     static GameMgr _instance;
     GameObject player;
+    private bool isLevelUp = false;
 
     public static GameMgr Instance
     {
@@ -36,6 +40,20 @@ public class GameMgr : MonoBehaviour
     {
         return player;
     }
+
+    public bool SetIsLevelUp(bool a)
+    {
+        return isLevelUp = a;
+    }
+
+    public void ManageLevel()
+    {
+        if (isLevelUp)
+        {
+            Time.timeScale = 0.0f;
+            SelectionWindowManager.Instance.ShowLevelUpPopup();        
+        }
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); 
@@ -48,6 +66,5 @@ public class GameMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

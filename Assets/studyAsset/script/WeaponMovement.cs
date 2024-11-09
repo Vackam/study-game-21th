@@ -29,13 +29,13 @@ public class WeaponMovement : MonoBehaviour
     public void Movement()
     {
         if (dir == Direction.UP)
-            transform.position += Vector3.up * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.up * speed * Time.deltaTime;
         else if(dir == Direction.DOWN)
-            transform.position += Vector3.down * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.down * speed * Time.deltaTime;
         else if (dir == Direction.LEFT)
-            transform.position += Vector3.left * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.left * speed * Time.deltaTime;
         else if (dir == Direction.RIGHT)
-            transform.position += Vector3.right * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;
     }
     void Delete()
     {
@@ -45,7 +45,7 @@ public class WeaponMovement : MonoBehaviour
             timer = 0;
         }
 
-        timer += Time.unscaledDeltaTime;
+        timer += Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,7 +53,7 @@ public class WeaponMovement : MonoBehaviour
        if (collision.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyMovement>().hp -= 50;
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         } 
     }
     // Start is called before the first frame update

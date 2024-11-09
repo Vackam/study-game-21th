@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
-    private float Exp;
+    [SerializeField]
+    private int Level = 1;
+    public float Exp;
     private float nextLevelTarget;
     // Start is called before the first frame update
 
@@ -15,7 +17,7 @@ public class PlayerExperience : MonoBehaviour
 
     public void AddExp(float exp)
     {
-        this.Exp += exp;
+        Exp += exp;
     }
 
     void GetNextLevel()
@@ -23,10 +25,13 @@ public class PlayerExperience : MonoBehaviour
         if (nextLevelTarget < Exp)
         {
             // 값 초기화
+            Level += 1;
             Exp = 0.0f;
             SetNextLevelTarget(nextLevelTarget + 10.0f);
 
             // 신호 보내기
+            GameMgr.Instance.SetIsLevelUp(true);
+            GameMgr.Instance.ManageLevel();
         }
     }
     void Start()
@@ -40,6 +45,6 @@ public class PlayerExperience : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GetNextLevel();
     }
 }
