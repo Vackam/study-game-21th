@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Transform transform;
+    new
+        // Start is called before the first frame update
+        Transform transform;
     private float speed = 5f;
     public GameObject abc;
     public GameObject Weapon;
@@ -28,42 +29,12 @@ public class PlayerMovement : MonoBehaviour
 
     public float waitingtime;
 
-    // Circle Weapon 관련 변수
-    public int CircleCount = 3; // 기본 원운동 3개.
-    public float CircleRad = 1f; // 회전 반지름
-    public float CircleSpeed = 50f; // 회전 속도
-
-    private float CircleCurrentDegree = 0f; // 현재 회전 각도
-
     // Bomb Weapon 관련 변수
     public float BombSpeed = 2.0f;
     public float BombTimer = 0f;
 
     public bool theWorld = false;
 
-    void CircleUpdate()
-    {
-        CircleCurrentDegree += Time.deltaTime * CircleSpeed;
-        if(CircleCurrentDegree >= 360f)
-        {
-            CircleCurrentDegree -= 360f;
-        }
-
-        for(int i=0; i<CircleCount; i++)
-        {
-            if (CircleWeapon[i] == null) continue;
-
-            float angle = CircleCurrentDegree + i * (360f / CircleCount);
-            float rad = angle * Mathf.Deg2Rad;
-
-            var x = CircleRad * Mathf.Sin(rad);
-            var y = CircleRad * Mathf.Cos(rad);
-            Vector3 newPosition = transform.position + new Vector3(x, y, 0f);
-            CircleWeapon[i].transform.position = newPosition;
-
-            CircleWeapon[i].transform.rotation = Quaternion.Euler(0, 0, -angle);
-        }
-    }
     void getLeft()
     {
         if (Input.GetKey(KeyCode.A))
@@ -159,21 +130,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // deprecated
-    //void TheWorld()
-    //{
-    //    if (Input.GetButtonDown("Fire1") && !theWorld)
-    //    {
-    //        Time.timeScale = 0;
-    //        theWorld = true;
-    //    }
-    //    else if(Input.GetButtonDown("Fire1") && theWorld)
-    //    {
-    //        Time.timeScale = 1;
-    //        theWorld = false;
-    //    }
-    //}
-
     void Start()
     {
         transform = GetComponent<Transform>();
@@ -191,8 +147,6 @@ public class PlayerMovement : MonoBehaviour
         getLeft();
         Attack();
         AttackDirection();
-        CircleUpdate();
         BombUpdate();
-        //TheWorld();
     }
 }

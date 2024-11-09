@@ -35,6 +35,11 @@ public class GameMgr : MonoBehaviour
         {
             Debug.LogError("쉬발 왜 두 개 이상이노");
         }
+        player = GameObject.FindGameObjectWithTag("Player"); 
+        if (player == null)
+        {
+            Debug.LogError("Player 태그가 지정된 GameObject를 찾을 수 없습니다.");
+        }
     }
     public GameObject GetPlayer()
     {
@@ -56,11 +61,6 @@ public class GameMgr : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player"); 
-        if (player == null)
-        {
-            Debug.LogError("Player 태그가 지정된 GameObject를 찾을 수 없습니다.");
-        }
     }
 
     // Update is called once per frame
