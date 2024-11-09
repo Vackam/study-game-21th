@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void CircleUpdate()
     {
-        CircleCurrentDegree += Time.unscaledDeltaTime * CircleSpeed;
+        CircleCurrentDegree += Time.deltaTime * CircleSpeed;
         if(CircleCurrentDegree >= 360f)
         {
             CircleCurrentDegree -= 360f;
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.left * speed * Time.deltaTime;
         }
     }
 
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.right * speed * Time.deltaTime;
         }
 
     }
@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += Vector3.down * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.down * speed * Time.deltaTime;
         }
     }
 
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.up * speed * Time.unscaledDeltaTime;
+            transform.position += Vector3.up * speed * Time.deltaTime;
         }
     }
     
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             }
         else
         {
-            timer += Time.unscaledDeltaTime;
+            timer += Time.deltaTime;
         }
 
     }
@@ -155,23 +155,24 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            BombTimer += Time.unscaledDeltaTime;
+            BombTimer += Time.deltaTime;
         }
     }
 
-    void TheWorld()
-    {
-        if (Input.GetButtonDown("Fire1") && !theWorld)
-        {
-            Time.timeScale = 0;
-            theWorld = true;
-        }
-        else if(Input.GetButtonDown("Fire1") && theWorld)
-        {
-            Time.timeScale = 1;
-            theWorld = false;
-        }
-    }
+    // deprecated
+    //void TheWorld()
+    //{
+    //    if (Input.GetButtonDown("Fire1") && !theWorld)
+    //    {
+    //        Time.timeScale = 0;
+    //        theWorld = true;
+    //    }
+    //    else if(Input.GetButtonDown("Fire1") && theWorld)
+    //    {
+    //        Time.timeScale = 1;
+    //        theWorld = false;
+    //    }
+    //}
 
     void Start()
     {
@@ -192,6 +193,6 @@ public class PlayerMovement : MonoBehaviour
         AttackDirection();
         CircleUpdate();
         BombUpdate();
-        TheWorld();
+        //TheWorld();
     }
 }

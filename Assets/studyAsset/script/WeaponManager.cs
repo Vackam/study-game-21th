@@ -17,7 +17,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private List<Dictionary<bool, Weapon>> WeaponList = new List<Dictionary<bool, Weapon>>();
 
-    public AddWeapon(Weapon weapon)
+    public void AddWeapon(Weapon weapon)
     {
         Dictionary<bool, Weapon> weaponEntry = new Dictionary<bool, Weapon>();
         weaponEntry.Add(true, weapon);
