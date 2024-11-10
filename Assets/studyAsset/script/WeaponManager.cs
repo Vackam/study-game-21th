@@ -7,6 +7,11 @@ public class WeaponManager : MonoBehaviour
     static WeaponManager _instance;
 
 
+    enum Weapon
+    {
+        BOMB,
+        CIRCLE
+    }
     public static WeaponManager Instance
     {
          get
@@ -25,12 +30,20 @@ public class WeaponManager : MonoBehaviour
     }
     // Start is called before the first frame update
     [SerializeField]
-    private List<Dictionary<bool, Weapon>> WeaponList = new List<Dictionary<bool, Weapon>>();
+    private Dictionary<Weapon, bool> WeaponList = new Dictionary<Weapon, bool>();
 
     public void AddWeapon(Weapon weapon)
     {
-        Dictionary<bool, Weapon> weaponEntry = new Dictionary<bool, Weapon>();
-        weaponEntry.Add(true, weapon);
+        WeaponList.Add(weapon, true);
+    }
+
+    public bool IsWeaponTrue(Weapon weapon)
+    {
+        if (WeaponList.ContainsKey(weapon))
+        {
+            return WeaponList[weapon];
+        }
+        return false;
     }
 
     /* �ѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤѤ� */
@@ -193,8 +206,8 @@ public class WeaponManager : MonoBehaviour
             return;
         }
         // Circle create
-        CreateCircle(player);
-        StartCoroutine(BasicAttack());
+        //CreateCircle(player);
+        //StartCoroutine(BasicAttack());
     }
 
     // Update is called once per frame
@@ -204,9 +217,8 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        CircleUpdate(player); 
-        BombUpdate();
+        //CircleUpdate(player); 
+        //BombUpdate();
         AttackDirection();
-        //Attack();
     }
 }
