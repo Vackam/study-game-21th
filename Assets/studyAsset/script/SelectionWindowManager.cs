@@ -51,6 +51,7 @@ public class SelectionWindowManager : MonoBehaviour
         this.gameObject.SetActive(false);  
     }
 
+    /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
     void DisplayRandomOptions()
     {
         availableOptions = new List<LevelUpOption>

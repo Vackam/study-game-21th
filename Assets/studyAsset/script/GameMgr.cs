@@ -55,7 +55,6 @@ public class GameMgr : MonoBehaviour
     {
         if (isLevelUp)
         {
-            Time.timeScale = 0.0f;
             SelectionWindowManager.Instance.ShowLevelUpPopup();        
         }
     }
