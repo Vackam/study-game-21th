@@ -18,7 +18,7 @@ public class SelectionWindowManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //HideLevelUpPopup();
+        HideLevelUpPopup();
     }
     public void ShowLevelUpPopup()
     {

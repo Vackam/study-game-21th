@@ -7,7 +7,7 @@ public class WeaponManager : MonoBehaviour
     static WeaponManager _instance;
 
 
-    enum Weapon
+    public enum Weapon
     {
         BOMB,
         CIRCLE
@@ -207,7 +207,7 @@ public class WeaponManager : MonoBehaviour
         }
         // Circle create
         //CreateCircle(player);
-        //StartCoroutine(BasicAttack());
+        StartCoroutine(BasicAttack());
     }
 
     // Update is called once per frame

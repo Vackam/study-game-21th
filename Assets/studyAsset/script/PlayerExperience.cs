@@ -20,6 +20,11 @@ public class PlayerExperience : MonoBehaviour
         Exp += exp;
     }
 
+    public float GetnextLevelTarget()
+    {
+        return this.nextLevelTarget;
+    }
+
     void GetNextLevel()
     {
         if (nextLevelTarget < Exp)
