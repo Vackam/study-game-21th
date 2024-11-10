@@ -99,6 +99,15 @@ public class WeaponManager : MonoBehaviour
 
         }  
     }
+	public void AddAttackSpeed(float AttackSpeed)
+	{
+		// Add but real action is subtract
+		this.AttackSpeed -= AttackSpeed;
+	}
+	public void AddAttackRange(float AttackRange)
+	{
+		this.AttackRange += AttackRange;
+	}
 
     /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
     // Circle Weapon 관련 변수
@@ -113,7 +122,7 @@ public class WeaponManager : MonoBehaviour
     private float CircleCurrentDegree = 0f; // 현재 회전 각도
 
     // Circle Weapon 관련 함수
-    private void CreateCircle(GameObject Player)
+    public void CreateCircle(GameObject Player)
     {
         CircleWeapon = new GameObject[CircleCount];
         Vector3 newPosition = Player.transform.position;
@@ -122,7 +131,7 @@ public class WeaponManager : MonoBehaviour
             CircleWeapon[i] = Instantiate(CircleEntity, newPosition, Quaternion.identity);
         }
     }
-    private void CircleUpdate(GameObject Player)
+    public void CircleUpdate(GameObject Player)
     {
         CircleCurrentDegree += Time.deltaTime * CircleSpeed;
         if(CircleCurrentDegree >= 360f)
