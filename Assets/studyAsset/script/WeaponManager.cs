@@ -88,24 +88,6 @@ public class WeaponManager : MonoBehaviour
             currentDir = Direction.RIGHT;
         }
     }
-    void Attack()
-    {
-        if(timer > AttackSpeed)
-            try
-            {
-                Vector3 MyPosition = transform.position;
-                GameObject weaponCreate =  Instantiate(BasicWeapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
-                weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
-                timer = 0.0f;
-            }
-            catch (UnassignedReferenceException)
-            {
-            }
-        else
-        {
-            timer += Time.deltaTime;
-        }
-    }
     IEnumerator BasicAttack()
     {
         while (true)
