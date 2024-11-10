@@ -21,11 +21,12 @@ public class BombWeaponMovement : MonoBehaviour
         yield return new WaitForSeconds(BombTimer);
         colliders = Physics2D.OverlapCircleAll(transform.position, BombRad, EnemyLayer);
         int count = 0;
+        int limit = colliders.Length > BombEnemyRange ? BombEnemyRange : colliders.Length;
         if(colliders.Length > 0)
         {
-            while(colliders[count] && count <= BombEnemyRange)
+            for(int i = 0; i<colliders.Length; i++)
             {
-                colliders[count].gameObject.GetComponent<EnemyMovement>().hp -= 100;
+                colliders[i].gameObject.GetComponent<EnemyMovement>().hp -= 100;
                 count++;
             } 
         }
