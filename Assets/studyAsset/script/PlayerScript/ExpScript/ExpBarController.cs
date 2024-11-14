@@ -28,8 +28,7 @@ public class ExpBarController : MonoBehaviour
             {
                 MaxExp = player.GetComponent<PlayerExperience>().GetnextLevelTarget();
                 CurExp = player.GetComponent<PlayerExperience>().Exp;
-                ExpSlider.value = CurExp / MaxExp
-                    ;
+                ExpSlider.value = CurExp / MaxExp;
             }
         }
     }
