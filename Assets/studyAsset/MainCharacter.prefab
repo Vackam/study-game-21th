@@ -98,5 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abc: {fileID: 0}
+  Weapon: {fileID: 0}
+  AttackRange: 5
+  AttackSpeed: 0.5
+  currentDir: 2
   timer: 0
   waitingtime: 0
+  BombSpeed: 2
+  BombTimer: 0
