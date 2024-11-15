@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4368236967641388830}
   - component: {fileID: 6481019225908045606}
   - component: {fileID: 866697774693762187}
+  - component: {fileID: 4383893114777431524}
   m_Layer: 8
   m_Name: EnemyRangedWeapon
   m_TagString: Enemy
@@ -97,3 +98,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663c49159d5e7db4a92de2cb3fff7a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DAMAGE: 10
+--- !u!58 &4383893114777431524
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118924022109421458}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.12

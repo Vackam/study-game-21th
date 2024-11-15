@@ -9,10 +9,21 @@ public class EnemyRangedWeaponMovement : MonoBehaviour
     private float range = 1.0f;
     private float speed = 3.0f;
 
+    [SerializeField]
+    private float DAMAGE = 10;
+
     IEnumerator Delete()
     {
         yield return new WaitForSeconds(range);
         Destroy(gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+       if (collision.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerHp>().SubtractHp(DAMAGE);
+            Destroy(gameObject);
+        } 
     }
     
     // Start is called before the first frame update

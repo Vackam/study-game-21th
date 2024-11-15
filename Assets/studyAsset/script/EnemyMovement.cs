@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     private Transform playerTransform;
     private float speed = 2.5f;
     public float hp = 100;
+    private float TackleDAMAGE = 1.0f;
     [SerializeField]
     private GameObject experienceOrb;
     void Start()
@@ -41,6 +42,14 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerHp>().SubtractHp(TackleDAMAGE);
+            Destroy(gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
