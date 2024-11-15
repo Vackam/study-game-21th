@@ -6,12 +6,13 @@ using UnityEngine;
 public class RangedEnemyMovement : MonoBehaviour
 {
     private GameObject player;
-    private float ATTACK_RANGE = 10.0f;
+    private float ATTACK_RANGE = 3.0f;
     private float CHECK_DELAY = 1.0f;
     private float speed = 2.5f;
 
     private float timer = 0.0f;
     private float AttackSpeed = 1.0f;
+
     public GameObject RangedWeapon;
     public enum RangedEnemyState
     {

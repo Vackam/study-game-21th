@@ -6,7 +6,7 @@ public class EnemyRangedWeaponMovement : MonoBehaviour
 {
     private GameObject player;
     private Vector3 ThatPosition;
-    private float range = 15.0f;
+    private float range = 1.0f;
     private float speed = 3.0f;
 
     IEnumerator Delete()

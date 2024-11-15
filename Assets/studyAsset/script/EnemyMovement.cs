@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
     private Transform playerTransform;
     private float speed = 2.5f;
     public float hp = 100;
@@ -13,6 +14,11 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         GameObject player = GameMgr.Instance.GetPlayer();
+        // 원거리 적일 때 예외
+        if(this.gameObject.GetComponent<RangedEnemyMovement>() != null)
+        {
+            return;
+        }
         if(player != null)
         {
             playerTransform = player.transform;
@@ -25,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
 
     void DeleteEnemy()
     {
-        if(this.hp <= 0)
+        if(hp <= 0)
         {
             //  경험치 구슬 생성.
             Vector3 MyPosition = transform.position;

@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     // Weapon 관련 변수
     public float AttackRange = 5.0f; // 얼마나 갈 건지 시간으로 사정거리를 늘리는 느낌.
     public float AttackSpeed = 0.5f; // 몇초마다 발사 할 건지
+
+    // 움직임 관련 변수
+    private Animator animator_;
+    int CheckMove = 0;
     public enum Direction
     {
         UP,
@@ -32,79 +36,102 @@ public class PlayerMovement : MonoBehaviour
     public float BombTimer = 0f;
 
 
-    void getLeft()
+    int getLeft()
     {
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += Vector3.left * speed * Time.deltaTime;
+            transform.localScale = new Vector3(-3, 3, 3);
+            SetisMoveTrue();
+            return 1;
         }
+        return 0;
     }
 
-    void getRight()
+    int getRight()
     {
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
+            transform.localScale = new Vector3(3, 3, 3);
+            SetisMoveTrue();
+            return 1;
         }
-
+        return 0;
     }
 
-    void getDown()
+    int getDown()
     {
         if (Input.GetKey(KeyCode.S))
         {
             transform.position += Vector3.down * speed * Time.deltaTime;
+            SetisMoveTrue();
+            return 1;
         }
+        return 0;
     }
 
-    void getUp()
+    int getUp()
     {
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += Vector3.up * speed * Time.deltaTime;
+            SetisMoveTrue();
+            return 1;
         }
+        return 0;
+    }
+
+    void SetisMoveTrue()
+    {
+        animator_.SetBool("isMove", true);
     }
     
-    void Attack()
+    void SetisMoveFalse()
     {
-        if(timer > AttackSpeed)
-            try
-            {
-                Vector3 MyPosition = transform.position;
-                GameObject weaponCreate =  Instantiate(Weapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
-                weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
-                timer = 0.0f;
-            }
-            catch (UnassignedReferenceException)
-            {
-            }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+        animator_.SetBool("isMove", false);
     }
-
-    void AttackDirection()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            currentDir = Direction.UP;
-        }
-
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            currentDir = Direction.DOWN;
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            currentDir = Direction.LEFT;
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            currentDir = Direction.RIGHT;
-        }
-
-    }
+    
+//    void Attack()
+//    {
+//        if(timer > AttackSpeed)
+//            try
+//            {
+//                Vector3 MyPosition = transform.position;
+//                GameObject weaponCreate =  Instantiate(Weapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
+//                weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
+//                timer = 0.0f;
+//            }
+//            catch (UnassignedReferenceException)
+//            {
+//            }
+//        else
+//        {
+//            timer += Time.deltaTime;
+//        }
+//    }
+//
+//    void AttackDirection()
+//    {
+//        if (Input.GetKey(KeyCode.UpArrow))
+//        {
+//            currentDir = Direction.UP;
+//        }
+//
+//        else if (Input.GetKey(KeyCode.DownArrow))
+//        {
+//            currentDir = Direction.DOWN;
+//        }
+//        else if (Input.GetKey(KeyCode.LeftArrow))
+//        {
+//            currentDir = Direction.LEFT;
+//        }
+//        else if (Input.GetKey(KeyCode.RightArrow))
+//        {
+//            currentDir = Direction.RIGHT;
+//        }
+//
+//    }
 
     void Start()
     {
@@ -112,15 +139,21 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         timer = 0.0f;
         waitingtime = 1.0f;
+        animator_ = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        getUp();
-        getRight();
-        getDown();
-        getLeft();
+        CheckMove += getUp();
+        CheckMove += getRight();
+        CheckMove += getDown();
+        CheckMove += getLeft();
+        if(CheckMove == 0)
+        {
+            SetisMoveFalse();
+        }
+        CheckMove = 0;
         //Attack();
         //AttackDirection();
     }

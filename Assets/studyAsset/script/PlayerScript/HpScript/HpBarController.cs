@@ -31,5 +31,5 @@ public class HpBarController : MonoBehaviour
                 HpSlider.value = CurHp / MaxHp;
             }
         }
-}
+    }
 }
