@@ -7,9 +7,9 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private Transform playerTransform;
-    private float speed = 2.5f;
+    public float speed = 2.5f;
     public float hp = 100;
-    private float TackleDAMAGE = 1.0f;
+    public float TackleDAMAGE = 1.0f;
     [SerializeField]
     private GameObject experienceOrb;
     void Start()
@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void DeleteEnemy()
+    public void DeleteEnemy()
     {
         if(hp <= 0)
         {

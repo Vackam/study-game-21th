@@ -58,6 +58,7 @@ public class GameMgr : MonoBehaviour
             SelectionWindowManager.Instance.ShowLevelUpPopup();        
         }
     }
+    
     void Start()
     {
     }
