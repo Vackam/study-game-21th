@@ -10,7 +10,7 @@ public class EnemyRangedWeaponMovement : MonoBehaviour
     private float speed = 3.0f;
 
     [SerializeField]
-    private float DAMAGE = 10;
+    private float DAMAGE = 1;
 
     IEnumerator Delete()
     {

@@ -53,7 +53,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private GameObject BasicWeapon;
 
-    private float AttackRange = 5.0f; // 사정거리
+    private float AttackRange = 3.0f; // 사정거리
     private float AttackSpeed = 0.5f; // 몇초마다 발사 할 건지
     public enum Direction
     {
@@ -130,28 +130,33 @@ public class WeaponManager : MonoBehaviour
         {
             CircleWeapon[i] = Instantiate(CircleEntity, newPosition, Quaternion.identity);
         }
+        StartCoroutine(CircleUpdate(Player));
     }
-    public void CircleUpdate(GameObject Player)
+    public IEnumerator CircleUpdate(GameObject Player)
     {
-        CircleCurrentDegree += Time.deltaTime * CircleSpeed;
-        if(CircleCurrentDegree >= 360f)
+        while (true)
         {
-            CircleCurrentDegree -= 360f;
-        }
+            CircleCurrentDegree += Time.deltaTime * CircleSpeed;
+            if (CircleCurrentDegree >= 360f)
+            {
+                CircleCurrentDegree -= 360f;
+            }
 
-        for(int i=0; i<CircleCount; i++)
-        {
-            if (CircleWeapon[i] == null) continue;
+            for (int i = 0; i < CircleCount; i++)
+            {
+                if (CircleWeapon[i] == null) continue;
 
-            float angle = CircleCurrentDegree + i * (360f / CircleCount);
-            float rad = angle * Mathf.Deg2Rad;
+                float angle = CircleCurrentDegree + i * (360f / CircleCount);
+                float rad = angle * Mathf.Deg2Rad;
 
-            var x = CircleRad * Mathf.Sin(rad);
-            var y = CircleRad * Mathf.Cos(rad);
-            Vector3 newPosition = Player.transform.position + new Vector3(x, y, 0f);
-            CircleWeapon[i].transform.position = newPosition;
+                var x = CircleRad * Mathf.Sin(rad);
+                var y = CircleRad * Mathf.Cos(rad);
+                Vector3 newPosition = Player.transform.position + new Vector3(x, y, 0f);
+                CircleWeapon[i].transform.position = newPosition;
 
-            CircleWeapon[i].transform.rotation = Quaternion.Euler(0, 0, -angle);
+                CircleWeapon[i].transform.rotation = Quaternion.Euler(0, 0, -angle);
+            }
+            yield return null;
         }
     }
     // Circle 끝
@@ -165,23 +170,24 @@ public class WeaponManager : MonoBehaviour
     private float BombTimer = 0f; // Bomb 폭발을 위한 시간 타이머
 
     // Bomb Weapon 관련 함수
-    void BombUpdate()
+    public void BombCall()
     {
-        if(BombSpeed < BombTimer)
+       StartCoroutine(BombUpdate()); 
+    }
+    public IEnumerator BombUpdate()
+    {
+        while (true)
         {
+            yield return new WaitForSeconds(BombSpeed);
             try
             {
                 Vector3 MyPosition = transform.position;
-                GameObject weaponCreate =  Instantiate(Bomb, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
+                GameObject weaponCreate = Instantiate(Bomb, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
                 BombTimer = 0.0f;
             }
             catch (UnassignedReferenceException)
             {
             }
-        }
-        else
-        {
-            BombTimer += Time.deltaTime;
         }
     }
     // Bomb 끝
