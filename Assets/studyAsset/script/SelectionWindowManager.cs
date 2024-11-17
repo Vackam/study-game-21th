@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class SelectionWindowManager : MonoBehaviour
 {
@@ -68,7 +69,7 @@ public class SelectionWindowManager : MonoBehaviour
 
 		while(selectedOptions.Count < OptionToSelect)
 		{
-			int randomIndex = Random.Range(0, availableOptions.Count);
+			int randomIndex = UnityEngine.Random.Range(0, availableOptions.Count);
 			if(!selectedOptions.Contains(availableOptions[randomIndex]))
 			{
 				selectedOptions.Add(availableOptions[randomIndex]);

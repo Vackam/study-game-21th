@@ -37,6 +37,7 @@ public class BombWeaponMovement : MonoBehaviour
             } 
         }
         // 삭제한다.
+        SoundManager.Instance.PlaySound(SoundManager.Instance.bombWeaponSound);
         Destroy(gameObject);
 
     }

@@ -214,8 +214,6 @@ public class WeaponManager : MonoBehaviour
         {
             return;
         }
-        //CircleUpdate(player); 
-        //BombUpdate();
         AttackDirection();
     }
 }

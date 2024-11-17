@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMgr : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameMgr : MonoBehaviour
     static GameMgr _instance;
     GameObject player;
     private bool isLevelUp = false;
+
+    [SerializeField]
+    private GameObject GameOverUI;
 
     public static GameMgr Instance
     {
@@ -40,6 +44,17 @@ public class GameMgr : MonoBehaviour
         {
             Debug.LogError("Player 태그가 지정된 GameObject를 찾을 수 없습니다.");
         }
+    }
+
+    public void ShowDeathUI()
+    {
+        Time.timeScale = 0.0f;
+        GameOverUI.SetActive(true);
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public GameObject GetPlayer()
     {

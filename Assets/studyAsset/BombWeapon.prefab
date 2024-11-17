@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8343008381000555807}
   - component: {fileID: 325982450555797045}
   - component: {fileID: -2671548053724781631}
-  m_Layer: 0
+  - component: {fileID: 4581209222915278327}
+  m_Layer: 6
   m_Name: BombWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,3 +152,18 @@ MonoBehaviour:
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &4581209222915278327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7536489553350793314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaa88dde247e604cb0c732797e848eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleWeaponSound: {fileID: 0}
+  bombWeaponSound: {fileID: 0}
+  BasicWeaponSound: {fileID: 0}
