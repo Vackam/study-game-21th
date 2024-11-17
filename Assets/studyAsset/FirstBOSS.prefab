@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8267398609851482953}
   - component: {fileID: 2642026739488644969}
-  - component: {fileID: -5468642819292130351}
+
+  - component: {fileID: -5365751149402686270}
   m_Layer: 8
   m_Name: FirstBOSS
   m_TagString: Enemy
@@ -85,7 +86,9 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+
 --- !u!114 &-5468642819292130351
+
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
