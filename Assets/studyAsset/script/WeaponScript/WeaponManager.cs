@@ -165,25 +165,33 @@ public class WeaponManager : MonoBehaviour
     /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
     // Bomb Weapon 관련 변수
     public GameObject Bomb;
+    private bool isBombActive = false;
 
     private float BombSpeed = 2.0f; // Bomb 폭발 주기
-    private float BombTimer = 0f; // Bomb 폭발을 위한 시간 타이머
 
     // Bomb Weapon 관련 함수
+    [ContextMenu("BombCall")]
     public void BombCall()
     {
-       StartCoroutine(BombUpdate()); 
+        if (!isBombActive)
+        {
+            Debug.Log("BombCall method called");
+            StartCoroutine(BombUpdate());
+            isBombActive = true;
+        }
     }
+
+
     public IEnumerator BombUpdate()
     {
         while (true)
         {
+            Debug.Log("Bomb Active");
             yield return new WaitForSeconds(BombSpeed);
             try
             {
                 Vector3 MyPosition = transform.position;
                 GameObject weaponCreate = Instantiate(Bomb, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
-                BombTimer = 0.0f;
             }
             catch (UnassignedReferenceException)
             {
