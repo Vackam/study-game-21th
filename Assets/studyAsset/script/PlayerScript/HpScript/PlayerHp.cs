@@ -52,6 +52,9 @@ public class PlayerHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Hp < 0)
+        {
+            GameMgr.Instance.ShowDeathUI();
+        }
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class SelectionWindowManager : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class SelectionWindowManager : MonoBehaviour
 	public Button optionButton1;
 	public Button optionButton2;
 	public Button optionButton3;
+    public const int OptionToSelect = 3;
 	public Text descriptionText;
 
 	private enum LevelUpOption
@@ -64,9 +67,9 @@ public class SelectionWindowManager : MonoBehaviour
 		
 		List<LevelUpOption> selectedOptions = new();
 
-		while(selectedOptions.Count < 3)
+		while(selectedOptions.Count < OptionToSelect)
 		{
-			int randomIndex = Random.Range(0, availableOptions.Count);
+			int randomIndex = UnityEngine.Random.Range(0, availableOptions.Count);
 			if(!selectedOptions.Contains(availableOptions[randomIndex]))
 			{
 				selectedOptions.Add(availableOptions[randomIndex]);
@@ -81,26 +84,27 @@ public class SelectionWindowManager : MonoBehaviour
 	// 버튼 연결
     void ConfigureButton(Button button, LevelUpOption option)
     {
+        button.onClick.RemoveAllListeners();
         switch (option)
         {
             case LevelUpOption.AttackSpeed:
                 button.onClick.AddListener(OnAttackSpeedSelected);
-                button.GetComponentInChildren<Text>().text = "속도가 빨라집니다! 0.1초";
+                button.GetComponentInChildren<TMP_Text>().text = "MORE ATTACK SPEED!(0.1s)";
                 break;
 
             case LevelUpOption.AttackRange:
                 button.onClick.AddListener(OnAttackRangeSelected);
-                button.GetComponentInChildren<Text>().text = "거리가 늘어납니다! 0.2";
+                button.GetComponentInChildren<TMP_Text>().text = "MORE LONG BASIC WEAPON!(0.1m)";
                 break;
 
             case LevelUpOption.AddCircleWeapon:
                 button.onClick.AddListener(OnCircleWeaponSelected);
-                button.GetComponentInChildren<Text>().text = "Circle 무기가 추가됩니다!";
+                button.GetComponentInChildren<TMP_Text>().text = "ADD CIRCLE WEAPON!";
                 break;
 
             case LevelUpOption.AddBombWeapon:
                 button.onClick.AddListener(OnBombWeaponSelected);
-                button.GetComponentInChildren<Text>().text = "Bomb 무기가 추가됩니다!";
+                button.GetComponentInChildren<TMP_Text>().text = "ADD BOMB WEAPON!";
                 break;
         }
     }
@@ -108,21 +112,18 @@ public class SelectionWindowManager : MonoBehaviour
 	// 여기 weaponManager로 다 수정해야함. 
     void OnAttackSpeedSelected()
     {
-        descriptionText.text = "속도가 빨라집니다! 0.1초";
 		WeaponManager.Instance.AddAttackSpeed(0.1f);
         HideLevelUpPopup();
     }
 
     void OnAttackRangeSelected()
     {
-        descriptionText.text = "거리가 늘어납니다! 0.2";
 		WeaponManager.Instance.AddAttackRange(0.2f);
         HideLevelUpPopup();
     }
 
     void OnCircleWeaponSelected()
     {
-        descriptionText.text = "Circle 무기가 추가됩니다!";
 		WeaponManager.Instance.CreateCircle(GameMgr.Instance.GetPlayer());
 		//WeaponManager.Instance.StartCoroutine(WeaponManager.Instance.CircleUpdate( GameMgr.Instance.GetPlayer() ));
         HideLevelUpPopup();
@@ -130,7 +131,7 @@ public class SelectionWindowManager : MonoBehaviour
 
     void OnBombWeaponSelected()
     {
-        descriptionText.text = "Bomb 무기가 추가됩니다!";
+        WeaponManager.Instance.BombCall();
         HideLevelUpPopup();
     }
 

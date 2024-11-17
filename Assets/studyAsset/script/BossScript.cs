@@ -34,7 +34,7 @@ public class BossScript : EnemyMovement
     {
         while (true)
         {
-            // °ø°İ¹üÀ§ ¿À¸é °ø°İ
+            // ê³µê²©ë²”ìœ„ ì˜¤ë©´ ê³µê²©
             if (Vector3.Distance(player.transform.position, transform.position) <= ATTACK_RANGE)
             {
                 state = BossEnemyState.ATTACK;
@@ -59,25 +59,27 @@ public class BossScript : EnemyMovement
         player = GameMgr.Instance.GetPlayer();
 
         StartCoroutine(CheckState());
+
     }
 
     public IEnumerator DashAttack()
     {
-        // 1ÃÊ Á¤Áö
+        // 1ì´ˆ ì •ì§€
         isDash = true;
-        speed = 0.0f; // Á¤Áö 
+        speed = 0.0f; // ì •ì§€ 
         yield return new WaitForSeconds(DASH_DELAY);
 
         speed = 7.0f;
         yield return new WaitForSeconds(DASH_TIME);
 
-        // ³¡³ª°í ³ª¼­ Á¤Áö
+        // ëë‚˜ê³  ë‚˜ì„œ ì •ì§€
         speed = 0.0f;
-        yield return new WaitForSeconds(DASH_DELAY/2);
+        yield return new WaitForSeconds(DASH_DELAY / 2);
 
         speed = 1.0f;
         isDash = false;
     }
+
 
     public IEnumerator KnockBackAttack()
     {
@@ -86,17 +88,23 @@ public class BossScript : EnemyMovement
         speed = 0.0f;
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Player"))
+
+            if (collider != null && collider.CompareTag("Player"))
+
             {
                 yield return new WaitForSeconds(ATTACK_DELAY);
                 Vector2 dir = collider.transform.position - this.transform.position;
 
-                player.GetComponent<Rigidbody2D>().AddForce(dir.normalized * this.knockbackSpeed, ForceMode2D.Impulse);
+
+                Rigidbody2D playerrb = player.GetComponent<Rigidbody2D>();
+                playerrb.AddForce(dir.normalized * knockbackSpeed, ForceMode2D.Impulse);
                 player.GetComponent<PlayerHp>().SubtractHp(TackleDAMAGE);
+
+                yield return new WaitForSeconds(ATTACK_DELAY / 2);
+                playerrb.velocity = Vector2.zero;
             }
         }
-        yield return new WaitForSeconds(ATTACK_DELAY/2);
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
         speed = 1.0f;
         isAttack = false;
     }
@@ -109,14 +117,16 @@ public class BossScript : EnemyMovement
     }
     private void OnDrawGizmos()
     {
-        // µğ¹ö±ëÀ» À§ÇÑ ¿øÇü ¹üÀ§ Ç¥½Ã
+        // ë””ë²„ê¹…ì„ ìœ„í•œ ì›í˜• ë²”ìœ„ í‘œì‹œ
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, ATTACK_RANGE);
     }
     // Update is called once per frame
     void Update()
     {
-        DeleteEnemy();    
+
+        DeleteEnemy();
+
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
         switch (state)

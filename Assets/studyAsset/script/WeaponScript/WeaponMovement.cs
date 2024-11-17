@@ -64,6 +64,7 @@ public class WeaponMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.Instance.PlaySound(SoundManager.Instance.BasicWeaponSound);
        StartCoroutine(Delete()); 
     }
 
