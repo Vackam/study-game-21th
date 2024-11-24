@@ -55,6 +55,7 @@ public class WeaponManager : MonoBehaviour
 
     private float AttackRange = 3.0f; // 사정거리
     private float AttackSpeed = 0.5f; // 몇초마다 발사 할 건지
+    private float AttackFlySpeed = 1.0f;
     public enum Direction
     {
         UP,
@@ -95,7 +96,7 @@ public class WeaponManager : MonoBehaviour
             yield return new WaitForSeconds(AttackSpeed);
             Vector3 MyPosition = player.transform.position;
             GameObject weaponCreate = Instantiate(BasicWeapon, new Vector3(MyPosition.x, MyPosition.y, MyPosition.z), Quaternion.identity);
-            weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackSpeed, AttackRange, currentDir.ToString());
+            weaponCreate.GetComponent<WeaponMovement>().SetDefault(AttackFlySpeed, AttackRange, currentDir.ToString());
 
         }  
     }
@@ -204,6 +205,7 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         // 모든 무기는 사용자 중심으로 나가니까 하나 받아오기
+        AttackFlySpeed += CoinManager.Instance.ShopPlusAttackSpeed;
         player = GameMgr.Instance.GetPlayer();
         if (player == null)
         {
