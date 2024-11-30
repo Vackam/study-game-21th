@@ -23,18 +23,15 @@ public class CoinManager : MonoBehaviour
     {
         ShopPlusHp = savedPlusHp;
         Debug.Log(savedPlusHp);
-        Debug.Log("여기까지 왔니? HP에서 알려드립니다.");
     }
 
     public void SetShopAttackSpeed(float savedPlusAttackSpeed)
     {
-        Debug.Log("값이 뭐가 왔을까요 ATTACKSPPED: " + savedPlusAttackSpeed);
         ShopPlusAttackSpeed = savedPlusAttackSpeed;
     }
 
     public void SetShopSpeed(float savedPlusSpeed)
     {
-        Debug.Log("값이 뭐가 왔을까요 SPEED: " + savedPlusSpeed);
         ShopPlusSpeed = savedPlusSpeed;
     }
     void Awake()
